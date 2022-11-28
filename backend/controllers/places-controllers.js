@@ -74,8 +74,7 @@ const createPlace = async (req, res, next) => {
       lat: 40.7487658,
       lng: -73.9879135,
     },
-    image:
-      "https://imagens-revista-pro.vivadecora.com.br/uploads/2021/01/Empire-State-Building-se-destaca-na-paisagem-de-Nova-York-foto-Pinterest.jpg",
+    image: req.file.path,
     creator,
   });
 
@@ -99,7 +98,6 @@ const createPlace = async (req, res, next) => {
     user.places.push(createdPlace)
     await user.save({ session: sess })
     await sess.commitTransaction()
-    console.log(sess)
   } catch (err) {
     const error = new HttpError(
       "Creating place failed, please try again.",
